@@ -12,5 +12,29 @@
 */
 
 Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/login', function () {
+    return view('welcome');
+});
+
+Route::get('/logout', function () {
+    return view('welcome');
+});
+
+Route::get('/productos', function () {
+    return view('welcome');
+});
+
+Route::get('/productos/show/{id}', function ($id) {
+    return view('welcome');
+});
+
+Route::get('/productos/create', function () {
+    return view('welcome');
+});
+
+Route::get('/productos/edit/{id}', function ($id) {
     return view('welcome');
 });
