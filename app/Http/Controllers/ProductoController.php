@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Producto;
 class ProductoController extends Controller
 {
    public $arrayProductos = array(
@@ -302,21 +302,25 @@ array('Servilletas de papel','Limpieza del hogar'),
 array('Suavizante ropa','Limpieza del hogar'),
 array('Toalla de papel','Limpieza del hogar')
 );
+
     public function getIndex()
     {
+        $producto = Producto::all();
         return view(
             'productos.index',
             array(
-                'arrayProductos' => $this->arrayProductos
+                'arrayProductos' => $producto
             )
         );
+
     }
 
     public function getShow($id)
     {
+        $producto = Producto::findOrFail($id + 1);
         return view('productos.show', array(
-            'producto' => $this->arrayProductos[$id],
-            'id' => $id,
+            'producto' => $producto,
+            'id' => $id
         ));
     }
 
@@ -326,6 +330,7 @@ array('Toalla de papel','Limpieza del hogar')
     }
     function getEdit($id)
     {
-        return view('productos.edit', array('id' => $id));
+        $producto = Producto::findOrFail($id + 1);
+        return view('productos.edit', array('producto' => $producto, 'id' => $id));
     }
 }

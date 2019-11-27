@@ -11,8 +11,9 @@
 
     </div>
     <div class="col-sm-8">
-        <h1>{{$producto[0]}}</h1>
-        <h6>{{$producto[1]}}</h6>
+        <h1>{{$producto->nombre}}</h1>
+        <h6>{{$producto->categoria}}</h6>
+
 
 
     <a class="btn btn-danger">Pendiente de compra</a>
