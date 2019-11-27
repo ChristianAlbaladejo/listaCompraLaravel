@@ -15,8 +15,12 @@
         <h6>{{$producto->categoria}}</h6>
 
 
+    @if ($producto->pendiente)
+        <a class="btn btn-danger">Producto actualmente comprado</a>
+    @else
+        <a class="btn btn-danger">Pendiente de compra</a>
+    @endif
 
-    <a class="btn btn-danger">Pendiente de compra</a>
     <a class="btn btn-warning" href="../../productos/edit/{{$id}}">Editar producto</a>
     <a class="btn btn-light" href="../../productos/">Volver al listado</a>
 
