@@ -61,4 +61,19 @@ class ProductoController extends Controller
         $producto->save();
         return redirect(action('ProductoController@getIndex', 'index'));
     }
+
+    public function bcomprar(Request $request){
+        $producto = Producto::findOrFail($request->input('id'));
+        $producto->pendiente = $request->input('pendiente');
+        $comprobador = $producto->pendiente = $request->input('pendiente');
+
+        if ($comprobador == 0) {
+            $producto->pendiente = 1;
+        }else{
+            $producto->pendiente = 0;
+        }
+        $producto->save();
+        return redirect(action('ProductoController@getShow', ['id' => $producto->id-1]));
+    }
+
 }

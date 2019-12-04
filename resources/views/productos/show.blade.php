@@ -15,11 +15,37 @@
         <h6>{{$producto->categoria}}</h6>
 
 
-    @if ($producto->pendiente)
-        <a class="btn btn-danger">Producto actualmente comprado</a>
-    @else
-        <a class="btn btn-danger">Pendiente de compra</a>
-    @endif
+ @if($producto->pendiente)
+                <form action="{{ action('ProductoController@bcomprar') }}" method="POST">
+
+                    {{method_field('PUT')}}
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $producto->id }}">
+                    <input type="hidden" name="pendiente" value="{{ $producto->pendiente }}">
+                    <button type="submit" class="btn btn-primary" >
+                            Comprado
+
+                        </button>
+                </form>
+            @else
+
+                <form action="{{ action('ProductoController@bcomprar') }}" method="POST">
+
+                    {{method_field('PUT')}}
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $producto->id }}">
+                    <input type="hidden" name="pendiente" value="{{ $producto->pendiente }}">
+                    <button type="submit" class="btn btn-danger">
+                            Comprar
+
+                        </button>
+                </form>
+
+
+
+
+
+            @endif
 
     <a class="btn btn-warning" href="../../productos/edit/{{$id}}">Editar producto</a>
     <a class="btn btn-light" href="../../productos/">Volver al listado</a>

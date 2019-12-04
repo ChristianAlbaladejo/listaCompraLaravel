@@ -25,6 +25,8 @@ Route::post('productos/create', 'ProductoController@postCreate')->middleware('au
 Route::get('productos/edit/{id}', 'ProductoController@getEdit')->where('id', '[0-9]+')->middleware('auth');
 Route::put('productos/edit', 'ProductoController@putEdit')->middleware('auth');
 
+ Route::put('productos/bcomprar','ProductoController@bcomprar');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
