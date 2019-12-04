@@ -18,14 +18,15 @@ class CreateProductosTable extends Migration
         });
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
-            $table->decimal('precio',8,2)->default(null);
-            $table->string('categoria', 64);
-            $table->string('imagen')->default(null);
-            $table->boolean('pendiente')->default(false);
-            $table->text('descripcion')->default(null);
+            $table->string('nombre')->nullable();
+            $table->decimal('precio',8,2)->default(null)->nullable();
+            $table->string('categoria', 64)->nullable();
+            $table->string('imagen')->default(null)->nullable();
+            $table->boolean('pendiente')->default(false)->nullable();
+            $table->text('descripcion')->default(null)->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -35,8 +36,8 @@ class CreateProductosTable extends Migration
      */
     public function down()
     {
-        Schema::table('productos', function (Blueprint $table) {
-            //
-        });
+
+            Schema::dropIfExists('productos');
+
     }
 }
