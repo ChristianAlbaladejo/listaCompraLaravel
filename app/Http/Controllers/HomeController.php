@@ -25,13 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
     public function getHome()
     {
+        $producto = Producto::all();
         return view(
             'productos.index',
             array(
-                'arrayProductos' => Producto::all()
+                'arrayProductos' => $producto
             )
         );
-}
+    }
 }
