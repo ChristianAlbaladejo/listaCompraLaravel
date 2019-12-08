@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use Illuminate\Support\Facades\Storage;
 class ProductoController extends Controller
 {
 
@@ -35,7 +36,7 @@ class ProductoController extends Controller
     function getEdit($id)
     {
         $producto = Producto::findOrFail($id + 1);
-        return view('productos.edit', array('producto' => $producto, 'id' => $id));
+        return view('productos.edit', array('producto'=>$producto));
     }
 
     public function putEdit(Request $request)
@@ -45,10 +46,12 @@ class ProductoController extends Controller
         $producto->nombre = $request->input('title');
         $producto->precio = $request->input('precio');
         $producto->categoria = $request->input('categoria');
-        $producto->imagen = $request->input('imagen');
+        if($request->exists('imagen')) {
+            $producto->imagen = Storage::disk('public')->putFile('imagenes', $request->file('imagen'));
+        }
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
-        return redirect(action('ProductoController@getShow', $id));
+        return redirect(action('ProductoController@getShow', ['id' => $producto->id]));
     }
     public function postCreate(Request $request)
     {
@@ -56,7 +59,9 @@ class ProductoController extends Controller
         $producto->nombre = $request->input('title');
         $producto->precio = $request->input('precio');
         $producto->categoria = $request->input('categoria');
-        $producto->imagen = $request->input('imagen');
+        if($request->exists('imagen')) {
+            $producto->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
+        }
         $producto->descripcion = $request->input('descripcion');
         $producto->save();
         return redirect(action('ProductoController@getIndex', 'index'));

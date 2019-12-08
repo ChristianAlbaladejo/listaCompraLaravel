@@ -10,8 +10,8 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            {{-- TODO: Abrir el formulario e indicar el método POST --}}
-            <form action="{{action('ProductoController@putEdit')}}" method="POST">
+
+            <form action="{{action('ProductoController@putEdit')}}" method="POST" enctype="multipart/form-data">
                  {{method_field('PUT')}}
             {{-- TODO: Protección contra CSRF --}}
             @csrf
@@ -38,6 +38,11 @@
                <label for="imagen">Imagen</label>
                <input type="text" name="imagen" id="imagen" value="{{$producto->imagen}}">
             </div>
+
+            <div class="form-group">
+                            <label for="avatar">Seleccionar imagen del imagen:</label>
+                            <input type="file" id="imagen" name="imagen">
+                        </div>
 
             <div class="form-group">
                <label for="descripcion">descripcion</label>
